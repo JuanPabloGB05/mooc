@@ -7,14 +7,10 @@ $email = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $pass  = $_POST['password'] ?? '';
-    
-    if ($email === '') {
-        $error = 'Rellena el email';
-    }elseif ($pass === '') {
-        $error = 'Rellena la contraseña';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'El email no tiene un formato válido.';
-    }   elseif (strlen($pass) < 6) {
+
+    if ($email === '' || $pass === '') {
+        $error = 'Rellena todos los campos.';
+    } elseif (strlen($pass) < 6) {
         $error = 'La contraseña debe tener al menos 6 caracteres.';
     } elseif (login($email, $pass)) {
         if (!empty($_POST['recordarme'])) {
@@ -31,14 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Credenciales incorrectas.';
     }
 }
+
+require __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Login — MiniApp Tareas</title>
-</head>
-<body>
 <h1>Iniciar sesión</h1>
 
 <?php if ($error): ?>
@@ -61,5 +52,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <button type="submit">Entrar</button>
 </form>
-</body>
-</html>
+
+<?php require __DIR__ . '/includes/footer.php'; ?>

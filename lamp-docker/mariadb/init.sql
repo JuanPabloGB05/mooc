@@ -17,5 +17,5 @@ CREATE TABLE tareas (
 
 -- ⚠️ SUSTITUIR por los hashes generados en el Paso 2
 INSERT INTO usuarios (email, password_hash, rol) VALUES
-('admin@demo.com', '$2y$10$REEMPLAZA_CON_TU_HASH_REAL', 'admin'),
-('user@demo.com',  '$2y$10$REEMPLAZA_CON_TU_HASH_REAL', 'user');
+('admin@demo.com', '$2y$10$OdDdOYjvNoVak9kab4bqvuTBwI0iVgFb3Sb5mpjPKl27J6EJLG5L6', 'admin'),
+('user@demo.com',  '$2y$10$vOqLGCjA8.04A8Pe1Ji/S.oJnv9stWbWkt4hryTFrpbpb05ZydO56', 'user');
