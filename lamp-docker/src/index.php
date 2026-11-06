@@ -16,7 +16,7 @@ $tareas = $stmt->fetchAll();
 
 <ul>
 <?php foreach ($tareas as $t): ?>
-  <li>
+  <li><?= htmlspecialchars($m->resumen()) ?></li>
     <form method="POST" action="tareas.php" style="display:inline">
       <input type="hidden" name="toggle_id" value="<?= $t['id'] ?>">
       <button type="submit"><?= $t['completada'] ? '☑' : '☐' ?></button>

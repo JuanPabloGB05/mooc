@@ -1,7 +1,7 @@
 <?php
 // src/classes/MaterialBiblioteca.php
 
-class MaterialBiblioteca {
+class MaterialBiblioteca implements Prestable {
     private int $id;
     private string $titulo;
     private string $autor;
@@ -47,10 +47,31 @@ class MaterialBiblioteca {
         return (int)date('Y') - $this->anio;
     }
 
-    public function antiguedad(): int {
-    if ($this->anio === null) return 0;
-    return (int)date('Y') - $this->anio;
-    }
     public function setAnio(?int $a): void { $this->anio = $a; }
     public function setAutor(string $a): void { $this->autor = $a; }
+
+    public function resumen(): string {
+        return $this->tipoMaterial() . ': ' . $this->titulo;
+    }
+
+    public function prestar(): bool {
+        if (!$this->disponible) return false;
+        $this->disponible = false;
+        return true;
+    }
+
+    public function devolver(): void {
+        $this->disponible = true;
+    }
+    
+    public function prestar(): bool {
+        if (!$this->disponible) return false;
+        $this->disponible = false;
+        return true;
+    }
+
+    public function devolver(): void { $this->disponible = true; }
+    public function isDisponible(): bool { return $this->disponible; }
+
+    public function diasPrestamo(): int { return 15; }
 }
