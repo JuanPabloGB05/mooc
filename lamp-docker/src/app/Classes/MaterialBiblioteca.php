@@ -1,7 +1,14 @@
 <?php
-// src/classes/MaterialBiblioteca.php
+declare(strict_types=1);
 
-class MaterialBiblioteca implements Prestable {
+namespace App\Classes;
+
+use App\Classes\Traits\TieneFechas;
+use App\Classes\Traits\Loggable;
+
+class MaterialBiblioteca implements Prestable
+{
+    use TieneFechas, Loggable;
     private int $id;
     private string $titulo;
     private string $autor;
@@ -63,15 +70,6 @@ class MaterialBiblioteca implements Prestable {
     public function devolver(): void {
         $this->disponible = true;
     }
-    
-    public function prestar(): bool {
-        if (!$this->disponible) return false;
-        $this->disponible = false;
-        return true;
-    }
-
-    public function devolver(): void { $this->disponible = true; }
-    public function isDisponible(): bool { return $this->disponible; }
 
     public function diasPrestamo(): int { return 15; }
 }

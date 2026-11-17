@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/MaterialBiblioteca.php';
+declare(strict_types=1);
+
+namespace App\Classes;
 
 class Libro extends MaterialBiblioteca {
     private string $isbn;
@@ -29,5 +31,5 @@ class Libro extends MaterialBiblioteca {
 
     public function resumen(): string {
     return 'Libro: ' . $this->titulo . ' — ' . $this->autor;
-}
+    }
 }

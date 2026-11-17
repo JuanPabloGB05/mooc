@@ -9,3 +9,4 @@ RUN echo "display_errors = On" > /usr/local/etc/php/conf.d/custom.ini \
     && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/custom.ini
 
 WORKDIR /var/www/html
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

@@ -1,20 +1,23 @@
 <?php
-require_once __DIR__ . '/Libro.php';
+declare(strict_types=1);
 
-class Audiolibro extends Libro {
+namespace App\Classes;
+
+class DVD extends MaterialBiblioteca {
     private int $duracionMin;
 
     public function __construct(
-        string $titulo, string $autor, ?int $anio, string $isbn,
+        string $titulo, string $autor, ?int $anio,
         int $duracionMin, bool $disponible = true, int $id = 0
     ) {
-        parent::__construct($titulo, $autor, $anio, $isbn, $disponible, $id);
+        parent::__construct($titulo, $autor, $anio, $disponible, $id);
         $this->duracionMin = $duracionMin;
     }
 
     public function getDuracionMin(): int { return $this->duracionMin; }
-    public function tipoMaterial(): string { return 'Audiolibro'; }
+    public function tipoMaterial(): string { return 'DVD'; }
     public function mostrarFicha(): string {
         return parent::mostrarFicha() . ' · ' . $this->duracionMin . ' min';
     }
+    public function diasPrestamo(): int { return 3; }
 }

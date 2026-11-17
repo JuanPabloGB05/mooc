@@ -1,7 +1,10 @@
 <?php
-require_once __DIR__ . '/includes/auth.php';
+declare(strict_types=1);
+
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/Includes/auth.php';
+
 requireAdmin();
-require __DIR__ . '/includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     $id = (int)$_POST['delete_id'];
