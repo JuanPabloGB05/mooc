@@ -7,6 +7,7 @@ use App\Classes\DVD;
 use App\Classes\Libro;
 use App\Classes\MaterialBiblioteca;
 use App\Classes\Revista;
+use App\Exceptions\MaterialNoEncontradoException;
 
 require_once __DIR__ . '/../Config/db.php';
 
@@ -21,13 +22,19 @@ class MaterialRepo {
         return $materiales;
     }
 
-    public function findById(int $id): ?MaterialBiblioteca {
+          
+    public function findById(int $id): MaterialBiblioteca // Ya no necesitamos la ?
+    {
         $stmt = db()->prepare('SELECT * FROM materiales WHERE id = ?');
         $stmt->execute([$id]);
         $fila = $stmt->fetch();
-        return $fila ? $this->hidratar($fila) : null;
-    }
 
+        if ($fila === false) {
+            throw new MaterialNoEncontradoException($id);
+        }
+
+        return $this->hidratar($fila);
+    }
     /**
      * Convierte una fila de BBDD en el objeto PHP correcto.
      * También hidrata la fecha de creación desde 'creado_en'.

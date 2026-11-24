@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/Includes/exceptions.php';
 require_once __DIR__ . '/../app/Includes/auth.php';
 
 use App\Exceptions\MaterialNoEncontradoException;
@@ -15,13 +16,17 @@ try {
     $repo = new MaterialRepo();
     $material = $repo->findById($id);
 } catch (MaterialNoEncontradoException $e) {
-  if (!$material) {
-      http_response_code(404);
-      exit('Material no encontrado');
-  }
+    http_response_code(404);
+    require __DIR__ . '/../app/Includes/header.php';
+    echo '<h1>Material no encontrado</h1>';
+    echo '<p>' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '<a href="/index.php">Volver al catálogo</a>';
+    require __DIR__ . '/../app/Includes/footer.php';
+    exit;
 }
 
 require __DIR__ . '/../app/Includes/header.php';
+
 ?>
 <h1><?= htmlspecialchars($material->mostrarFicha()) ?></h1>
 

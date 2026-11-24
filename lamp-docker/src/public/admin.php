@@ -2,7 +2,9 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/Includes/exceptions.php';
 require_once __DIR__ . '/../app/Includes/auth.php';
+require __DIR__ . '/../app/Includes/header.php';
 
 requireAdmin();
 
@@ -45,4 +47,4 @@ GROUP BY u.id')->fetchAll();
   <?php endforeach; ?>
 </table>
 
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/../app/Includes/footer.php'; ?>
